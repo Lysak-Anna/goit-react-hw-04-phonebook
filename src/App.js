@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import useLocalStorage from '../src/hooks/localStorageHook';
 import { nanoid } from 'nanoid';
 import ContactForm from 'components/ContactForm/ContactForm';
@@ -41,10 +41,13 @@ function App() {
   function onChangeHandler(event) {
     setFilter(event.target.value);
   }
-  function deleteItemHandler(event) {
-    const id = event.currentTarget.id;
-    setContacts(prevState => prevState.filter(item => item.id !== id));
-  }
+  const deleteItemHandler = useCallback(
+    event => {
+      const id = event.currentTarget.id;
+      setContacts(prevState => prevState.filter(item => item.id !== id));
+    },
+    [setContacts]
+  );
 
   return (
     <div className="App">

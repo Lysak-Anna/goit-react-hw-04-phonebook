@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Element, Image, Name, Number, Button, Icon } from './Item.styled';
-export default function Item({ name, number, onClick, id }) {
+function Item({ name, number, onClick, id }) {
   return (
     <Element>
       <Image>{name.slice(0, 1)}</Image>
@@ -21,3 +22,4 @@ Item.propTypes = {
   number: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };
+export default memo(Item);
